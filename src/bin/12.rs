@@ -28,18 +28,16 @@ fn sum_map(m: Map<String, Value>, part_two: bool) -> i32 {
             Value::Object(v) => sum_map(v, part_two),
             Value::Number(v) => v.as_i64().unwrap() as i32,
             Value::String(v) => {
-                if v == "red" { found_red = true; }
+                if part_two && v == "red" {
+                    return 0;
+                }
                 0
             }
             _ => 0,
         };
         sum += r;
     }
-    if part_two && found_red {
-        0
-    } else {
-        sum
-    }
+    sum
 }
 
 fn sum_array(a: Vec<Value>, part_two: bool) -> i32 {
